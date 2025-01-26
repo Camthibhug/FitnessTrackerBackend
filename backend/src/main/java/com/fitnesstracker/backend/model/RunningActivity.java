@@ -7,6 +7,8 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -17,7 +19,11 @@ import jakarta.persistence.Table;
 public class RunningActivity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
@@ -36,8 +42,8 @@ public class RunningActivity {
     public RunningActivity() {}
 
     // Constructor with all fields
-    public RunningActivity(String id, LocalDateTime startTime, List<Position> positions, double totalDistance, int totalTime) {
-        this.id = id;
+    public RunningActivity(String name, LocalDateTime startTime, List<Position> positions, double totalDistance, int totalTime) {
+        this.name = name;
         this.startTime = startTime;
         this.positions = positions;
         this.totalDistance = totalDistance;
@@ -45,12 +51,12 @@ public class RunningActivity {
     }
 
     // Getters and setters
-    public String getId() {
-        return id;
+    public String getname() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public LocalDateTime getStartTime() {
@@ -83,5 +89,13 @@ public class RunningActivity {
 
     public void setTotalTime(int totalTime) {
         this.totalTime = totalTime;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
